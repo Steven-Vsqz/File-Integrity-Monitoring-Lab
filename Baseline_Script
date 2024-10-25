@@ -1,0 +1,18 @@
+# File Integrity Baseline Script
+# THIS SCRIPT GOES ON THE TARGET MACHINE
+# Open up notepad, copy and paste the script below, and save it with the extention of .ps1 (i.e Baseline.ps1)
+$directory = "C:\Users\Host\Documents"
+$baselineFile = "C:\FIM\baseline.txt"
+
+# Create directory for storing baseline if it doesn't exist
+if (-not(Test-Path "C:\FIM")) {
+    New-Item -Path "C:\FIM" -Itemtype Directory
+}
+
+# Get files and Generate SHA256 hashes
+Get-ChildItem -Path $directory -Recurse | ForEach-Object {
+    $hash = Get-FileHash $_.FullName -Algorithm SHA256
+    "$($_.FullName) $($hash.Hash)" >> $baselineFile
+}
+
+Write-Host "Baseline hash file created at $baselineFile"
