@@ -1,0 +1,35 @@
+# File Integrity Check Script
+# THIS SCRIPT GOES ON THE TARGET MACHINE
+# Open up notepad, copy and paste the script below, and save it with the extention of .ps1 (i.e Baseline.ps1)
+$directory = "C:\Users\Host\Documents"
+$baselineFile = "C:\FIM\baseline.txt"
+$logFile = "C:\FIM\integrity_check.log"
+
+# Load baseline hashes
+$baselineHashes = @{}
+Get-Content $baselineFile | ForEach-Object {
+    $parts = $_.Split(" ")
+    $baselineHashes[$parts[0]] = $parts[1]
+}
+
+# Perform integrity check
+$modifiedFiles = @()
+
+Get-ChildItem -Path $directory -Recurse | ForEach-Object {
+    $fileHash = Get-FileHash $_.FullName -Algorith SHA256
+    if ($baselineHashes[$_.FullName] -ne $fileHash.Hash) {
+        $modifiedFiles += $_.FullName
+    }
+}
+
+# Log and alert if files modified
+if ($modifiedFiles.Count -gt 0) {
+    $logEntry = "ALERT: Files modified: " + ($modifiedFiles -join ", ")
+    $logEntry += " at " + (Get-Date)
+    $logEntry >> $logFile
+
+    # Write to Windows Event Log
+    Write-EventLog -LogName Application -Source "FileIntegrityMonitor" -EntryType Warning -EventID 1001 -Message $logEntry
+} else {
+    "No changes detected at " + (Get-Date) >> $logFile
+}
