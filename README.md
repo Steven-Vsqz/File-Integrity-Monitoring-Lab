@@ -23,7 +23,7 @@ In this homelab, I set up a File Integrity Monitoring (FIM) system with the foll
 </details>
 
 <details open>
-<summary><h2>💻Active Directory Setup</h2></summary>
+<summary><h2>💻Setup</h2></summary>
 
 I set up two Windows virtual machines on an internal network and gave each a static IP address. I also mounted a shared folder between them for easy access.
 
