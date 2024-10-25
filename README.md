@@ -1,7 +1,11 @@
 <h1 align="center">File Integrity Monitoring Lab</h1>
 
 This project demonstrates a File Integrity Monitoring (FIM) system using PowerShell and WinSCP on a Windows homelab setup. The lab includes a monitoring machine and a target machine, where file integrity is monitored based on NIST standards.
-<br />
+
+<div align="center">
+<img src="https://github.com/user-attachments/assets/3cc9cc2f-8c98-43d6-8922-eab02499c3e8" style="height: 55%; width: 55%;">
+</div>
+
 <div align="center">
 <h2>🛠️Utilities & Tools Used</h2>
 
