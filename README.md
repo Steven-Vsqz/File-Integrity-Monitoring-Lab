@@ -7,8 +7,10 @@
 <!----------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
 ## Objective
 
-- [x] **Something
-
+- [x] Set up a virtualized environment in VirtualBox.
+- [x] Install a Linux-based system for testing.
+- [x] Use an open-source FIM tool to monitor and log file changes.
+- [x] Simulate file changes and analyze the alerts generated.
 <!----------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
 ## Utilities & Tools Used
 ![image](https://img.shields.io/badge/Windows-0078D6?style=for-the-badge&logo=windows&logoColor=white)
